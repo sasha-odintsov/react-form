@@ -10,9 +10,13 @@ function App() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (login !== loginCorrect) {
+    const pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    
+    if(!login.match(pattern)) {
+      setShowAlert('An invalid email')
+    } else if (login !== loginCorrect) {
       setShowAlert('Wrong login')
-    }  else if (password !== passwordCorrect) {
+    } else if (password !== passwordCorrect) {
       setShowAlert('Wrong password')
     } else {
       setShowAlert('')
@@ -25,7 +29,7 @@ function App() {
       <form className="form" onSubmit={handleSubmit}>
         <p className="form-title">Log in</p>
         <div className="form-floating">
-          <input type="email"  value={login} onChange={(event)=>{setLogin(event.target.value)}} className="form-control" id="floatingInput" placeholder="Email" />
+          <input type="text"  value={login} onChange={(event)=>{setLogin(event.target.value)}} className="form-control" id="floatingInput" placeholder="Email" />
           <label htmlFor="floatingInput">Email</label>
         </div>
         <div className="form-floating">
