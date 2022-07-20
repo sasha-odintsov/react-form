@@ -26,10 +26,10 @@ function App() {
 
   return (
     <div className='wrap'>
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit} noValidate="noValidate">
         <p className="form-title">Log in</p>
         <div className="form-floating">
-          <input type="text"  value={login} onChange={(event)=>{setLogin(event.target.value)}} className="form-control" id="floatingInput" placeholder="Email" />
+          <input type="email"  value={login} onChange={(event)=>{setLogin(event.target.value)}} className="form-control" id="floatingInput" placeholder="Email" />
           <label htmlFor="floatingInput">Email</label>
         </div>
         <div className="form-floating">
