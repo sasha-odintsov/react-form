@@ -1,46 +1,67 @@
-import './App.css'
-import { useState } from 'react';
+import React from 'react';
+import './App.css';
 
-function App() {
-  const loginCorrect = 'artem@ithillel.ua';
-  const passwordCorrect = '123456';
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
-  const [showAlert, setShowAlert] = useState();
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      login: '',
+      password: '',
+      showAlert: ''
+    };
+    this.loginCorrect = 'artem@ithillel.ua';
+    this.passwordCorrect = '123456';
+    // this.handleSubmit = this.handleSubmit.bind(this);;
+  }
 
-  function handleSubmit(event) {
+  // handleSubmit(event) {
+  //   event.preventDefault();
+  //   const pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+  //   if(!this.state.login.match(pattern)) {
+  //     this.setState({showAlert: 'An invalid email'})
+  //   } else if (this.state.login !== this.loginCorrect) {
+  //     this.setState({showAlert: 'Wrong login'})
+  //   } else if (this.state.password !== this.passwordCorrect) {
+  //     this.setState({showAlert: 'Wrong password'})
+  //   } else {
+  //     this.setState({showAlert: null})
+  //     console.log(`Welcome! Login: ${this.state.login} Password: ${this.state.password}`)
+  //   }
+  // }
+  handleSubmit = (event) => {
     event.preventDefault();
     const pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-    
-    if(!login.match(pattern)) {
-      setShowAlert('An invalid email')
-    } else if (login !== loginCorrect) {
-      setShowAlert('Wrong login')
-    } else if (password !== passwordCorrect) {
-      setShowAlert('Wrong password')
+    if(!this.state.login.match(pattern)) {
+      this.setState({showAlert: 'An invalid email'})
+    } else if (this.state.login !== this.loginCorrect) {
+      this.setState({showAlert: 'Wrong login'})
+    } else if (this.state.password !== this.passwordCorrect) {
+      this.setState({showAlert: 'Wrong password'})
     } else {
-      setShowAlert('')
-      console.log(`Welcome! Login: ${login} Password: ${password}`)
+      this.setState({showAlert: null})
+      console.log(`Welcome! Login: ${this.state.login} Password: ${this.state.password}`)
     }
   }
 
-  return (
-    <div className='wrap'>
-      <form className="form" onSubmit={handleSubmit} noValidate="noValidate">
+  render() {
+    return(
+      <div className='wrap'>
+      <form className="form" onSubmit={this.handleSubmit} noValidate="noValidate">
         <p className="form-title">Log in</p>
         <div className="form-floating">
-          <input type="email"  value={login} onChange={(event)=>{setLogin(event.target.value)}} className="form-control" id="floatingInput" placeholder="Email" />
+          <input type="email"  value={this.state.login} onChange={(event)=>{this.setState({login: event.target.value})}} className="form-control" id="floatingInput" placeholder="Email" />
           <label htmlFor="floatingInput">Email</label>
         </div>
         <div className="form-floating">
-          <input type="password" value={password} onChange={(event)=>{setPassword(event.target.value)}} className="form-control" id="floatingPassword" placeholder="Password" />
+          <input type="password" value={this.state.password} onChange={(event)=>{this.setState({password: event.target.value})}} className="form-control" id="floatingPassword" placeholder="Password" />
           <label htmlFor="floatingPassword">Password</label>
         </div>
-        <p>{showAlert}</p>
-        <button type="submit" className="btn btn-outline-primary" disabled={!login || !password}>Submit</button>
+        <p>{this.state.showAlert}</p>
+        <button type="submit" className="btn btn-outline-primary" disabled={!this.state.login || !this.state.password}>Submit</button>
       </form>
     </div>
-  );
+    )
+  }
 }
 
 export default App;
