@@ -1,12 +1,6 @@
-.wrap {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-}
-
 .form {
     width: 300px;
-    margin: 0 auto;  
+    margin: 50px auto;  
     border: 1px #ced4da solid;
     padding: 20px;
     border-radius: 0.375rem;
